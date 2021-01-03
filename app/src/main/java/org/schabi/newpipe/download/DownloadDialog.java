@@ -294,7 +294,9 @@ public class DownloadDialog extends DialogFragment
         radioStreamsGroup.setOnCheckedChangeListener(this);
 
         initToolbar(view.findViewById(R.id.toolbar));
-        setupDownloadOptions();
+        //setupDownloadOptions();
+        setupDownloadOptionsForAudioOnly();
+
 
         prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
 
@@ -945,5 +947,20 @@ public class DownloadDialog extends DialogFragment
                 currentInfo.getUrl(), psName, psArgs, nearLength, recoveryInfo);
 
         dismiss();
+    }
+
+    //Ne permet le téléchargement que pour l'audio
+    // Remplace setupDownloadOptions
+    protected void setupDownloadOptionsForAudioOnly() {
+        final RadioButton audioButton = radioStreamsGroup.findViewById(R.id.audio_button);
+        final RadioButton videoButton = radioStreamsGroup.findViewById(R.id.video_button);
+        final RadioButton subtitleButton = radioStreamsGroup.findViewById(R.id.subtitle_button);
+
+        audioButton.setVisibility(View.INVISIBLE);
+        videoButton.setVisibility(View.INVISIBLE);
+        subtitleButton.setVisibility(View.INVISIBLE);
+
+        audioButton.setChecked(true);
+        setupAudioSpinner();
     }
 }

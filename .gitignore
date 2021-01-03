@@ -18,3 +18,5 @@
 bin/
 .vscode/
 *.code-workspace
+/app/release/output-metadata.json
+/app/release/Simple-0.20.8.apk

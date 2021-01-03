@@ -9,8 +9,8 @@ android {
     buildToolsVersion '29.0.3'
 
     defaultConfig {
-        applicationId "org.schabi.newpipe"
-        resValue "string", "app_name", "NewPipe"
+        applicationId "etica.Simple"
+        resValue "string", "app_name", "Simple"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 962
@@ -41,8 +41,8 @@ android {
                 resValue "string", "app_name", "NewPipe Debug"
             } else {
                 applicationIdSuffix ".debug." + normalizedWorkingBranch
-                resValue "string", "app_name", "NewPipe " + workingBranch
-                archivesBaseName = 'NewPipe_' + normalizedWorkingBranch
+                resValue "string", "app_name", "Simple " + workingBranch
+                archivesBaseName = 'Simple_' + normalizedWorkingBranch
             }
         }
 
@@ -106,7 +106,7 @@ ext {
 
 configurations {
     checkstyle
-    ktlint
+    //ktlint
 }
 
 checkstyle {
@@ -137,25 +137,25 @@ task runCheckstyle(type: Checkstyle) {
 def outputDir = "${project.buildDir}/reports/ktlint/"
 def inputFiles = project.fileTree(dir: "src", include: "**/*.kt")
 
-task runKtlint(type: JavaExec) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-    main = "com.pinterest.ktlint.Main"
-    classpath = configurations.ktlint
-    args "src/**/*.kt"
-}
+//task runKtlint(type: JavaExec) {
+//    inputs.files(inputFiles)
+//    outputs.dir(outputDir)
+//    main = "com.pinterest.ktlint.Main"
+//    classpath = configurations.ktlint
+//    args "src/**/*.kt"
+//}
+//
+//task formatKtlint(type: JavaExec) {
+//    inputs.files(inputFiles)
+//    outputs.dir(outputDir)
+//    main = "com.pinterest.ktlint.Main"
+//    classpath = configurations.ktlint
+//    args "-F", "src/**/*.kt"
+//}
 
-task formatKtlint(type: JavaExec) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-    main = "com.pinterest.ktlint.Main"
-    classpath = configurations.ktlint
-    args "-F", "src/**/*.kt"
-}
-
-afterEvaluate {
+/*afterEvaluate {
     preDebugBuild.dependsOn formatKtlint, runCheckstyle, runKtlint
-}
+}*/
 
 dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
@@ -166,7 +166,7 @@ dependencies {
     kapt "frankiesardo:icepick-processor:${icepickVersion}"
 
     checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
-    ktlint "com.pinterest:ktlint:0.40.0"
+//    ktlint "com.pinterest:ktlint:0.40.0"
 
     debugImplementation "com.facebook.stetho:stetho:${stethoVersion}"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
